@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+
+	<!--  <context:property-placeholder location="jdbc.properties" />  -->
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+	<property name="dataSource" ref="allibilliDS"></property>
+	</bean>
+
+	
+	<bean id="allibilliDS" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.studentmgmtdb.url}" />
+		<property name="username" value="${jdbc.studentmgmtdb.username}" />
+		<property name="password" value="${jdbc.studentmgmtdb.password}" />
+		<property name="maxIdle" value="15" />
+		<property name="minIdle" value="10" />
+		<property name="maxActive" value="-1" />
+		<property name="initialSize" value="50" />
+		
+	</bean>
+</beans>

@@ -1,0 +1,85 @@
+p {
+	margin: 5px;
+}
+
+.settings {
+	background-image: url(../images/folder_wrench.png);
+}
+
+.nav {
+	background-image: url(../images/folder_go.png);
+}
+
+.info {
+	background-image: url(../images/information.png);
+}
+
+.collapseBtn {
+	background-image: url(../images/collapse.png);
+}
+.youtube {
+	background-image: url(../images/youtube.png);
+}
+.dev {
+	background-image: url(../images/hammer.png);
+}
+.treeBtn {
+	background-image: url(../images/tree.png);
+}
+.treeBtnDel {
+	background-image: url(../images/treeDel.png);
+}
+.aiplane {
+	background-image: url(../images/airplane.png);
+}
+.deals {
+	background-image: url(../images/deals.png);
+}
+.quickLinks {
+	background-image: url(../images/clock4.png);
+}
+.india {
+	background-image: url(../images/india.png);
+}
+.usa {
+	background-image: url(../images/usa.png);
+}
+.travel {
+	background-image: url(../images/travel.png);
+}
+.kids {
+	background-image: url(../images/girl.png);
+}
+.radio {
+	background-image: url(../images/radio.png);
+}
+.games {
+	background-image: url(../images/games.png);
+}
+.movie {
+	background-image: url(../images/movie.png);
+}
+.ms {
+	background-image: url(../images/ms.png);
+}
+.jobs {
+	background-image: url(../images/jobs.png);
+}
+.books {
+	background-image: url(../images/books.png);
+}
+.sw {
+	background-image: url(../images/sw.png);
+}
+.food {
+	background-image: url(../images/food.png);
+}
+.think {
+	background-image: url(../images/think.png);
+}
+.ccs {
+	background-image: url(../images/ccs.png);
+}
+.invalid {
+	background-image: url(../images/invalid.png);
+}

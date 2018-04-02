@@ -1,0 +1,2 @@
+<font face="Tahoma" size="1" color="#808080"> Open Source Product Of
+	AlliBilli. Rights Yet To Reserve.<BR>Kumon and all Kumon-based trademarks are trademarks of Kumon in the United States, other countries, or both.</font>

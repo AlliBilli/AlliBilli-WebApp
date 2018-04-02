@@ -1,0 +1,156 @@
+function onSandboxLoad()
+{
+	Ext.MessageBox.updateProgress(0.9, "Loaded, Now Rendering");
+	isInitialLoadCompleted = true;
+
+	sandboxModel = listSandboxStore.first();
+	panels = sandboxModel.panels();
+	
+	panels.each(function(panel)
+	{
+		
+		accs = panel.accs();
+		
+		accs.each(function(accordian)
+		{
+			console.log(accordian.get('accdName'));
+			treeElements = '';//getTree(accordian);
+			iconClassName = accordian.get('iconCls');
+			if(iconClassName==null || iconClassName=="")
+				iconClassName='settings';
+			if (accordian.get('panelId') == 1)
+			{
+				lAccordion.add(
+				{
+					title : accordian.get('accdName'),
+					iconCls : iconClassName,
+					layout: 'fit',
+					items :
+					[
+						treeElements
+					]
+				});
+				
+			} else
+			{
+				try{
+				rAccordion.add(
+				{
+				title : accordian.get('accdName'),
+				iconCls : iconClassName,
+				border : true,
+				id : accordian.get('accdName'),
+				layout: 'fit',
+				items :
+				[
+					treeElements
+				]
+				}
+				);
+				if(accordian.get('expand'))
+					rAccordion.getComponent(accordian.get('accdName')).expand();
+				}
+				catch(e)
+				{
+					alert(e);
+				}
+			}
+		});
+	});	
+	
+}
+
+function getTree(accordian)
+{
+	var jsonTreeElements = accordian.treeElements();
+	myArr = new Array();
+	var tree = "";
+	jsonTreeElements.each(function(treeElement)
+	{
+		console.log(treeElement.data.text);
+		myArr.push(treeElement.data);
+	});
+	
+	treeStore = Ext.create('Ext.data.TreeStore',
+	{
+		root :
+		{
+		expanded : true,
+		children : myArr
+		}
+	});
+	
+	tree = Ext.create('Ext.tree.Panel',
+	{
+	store : treeStore,
+	rootVisible : false,
+	border : false,
+	autoScroll : true,
+	listeners :
+	{
+		itemclick : function(view, record, item, index, e, eOpts)
+		{
+			if (record.isLeaf())
+			{
+				if (record && record.raw && record.raw.eleUrl)
+				{
+					var isTabAvailable = false;
+					
+					isTabAvailable = isTabInTabsAvailable(getPreparedId(record.raw.text, record.raw.eleId));
+					
+					if (isTabAvailable)
+						centerObj.setActiveTab(Ext
+						        .getCmp(getPreparedId(record.raw.text, record.raw.eleId)));
+					else
+					{
+						var w = Ext.getCmp('west-panel');
+						var e = Ext.getCmp('east-panel');
+						if (accordian.get('panelId') == 1)
+							e.collapse();
+						else if (accordian.get('panelId') == 2)
+							w.collapse();
+						else
+						{
+							w.collapse();
+							e.collapse();
+						}
+						var objToActive = centerObj.add(getIFramePnl( record.raw.eleId,record.raw.text,record.raw.eleUrl));
+						centerObj.setActiveTab(objToActive);
+					}
+					
+				} else
+					alert("No URL is appended to this tree node");
+			} else
+				(record.isExpanded()) ? record.collapse() : record.expand();
+		}
+	},
+	dockedItems :
+	[
+		{
+		xtype : 'toolbar',
+		items :
+		[
+		{
+		text : 'Expand All',
+		iconCls : '',
+		handler : function()
+		{
+			tree.expandAll();
+		}
+		}, '->',
+		{
+		text : 'Collapse All',
+		handler : function()
+		{
+			tree.collapseAll();
+		}
+		}
+		]
+		}
+	]
+	});
+	
+	return tree;
+}
+
+

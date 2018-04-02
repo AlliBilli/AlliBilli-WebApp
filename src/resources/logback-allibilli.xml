@@ -1,0 +1,45 @@
+<configuration>
+
+	<appender name="A1" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>[%thread] %-5level [%-30file : %-4line][%date{MMM dd yyyy HH:mm:ss.SSS}] %msg%n
+            </Pattern>
+		</layout>
+	</appender>
+
+	<appender name="SIFT" class="ch.qos.logback.classic.sift.SiftingAppender">
+    <discriminator class="ch.qos.logback.classic.sift.JNDIBasedContextDiscriminator">
+      <defaultValue>unknown</defaultValue>
+    </discriminator>
+    <sift>
+      <appender name="FILE-${contextName}" class="ch.qos.logback.core.FileAppender">
+        <file>${catalina.base}/logs/${contextName}.log</file>
+        <prudent>true</prudent>
+        <encoder>
+          <pattern>[%thread] %-5level [%-30file : %-4line][%date{MMM dd yyyy HH:mm:ss.SSS}] %msg%n</pattern>
+         </encoder>
+      </appender>
+     </sift>
+    </appender>
+	
+	<logger name="org.apache.commons" level="ERROR" />
+	<logger name="org.apache.http" level="ERROR" />
+	<logger name="org.apache.commons.digester.Digester" level="ERROR" />
+	<logger name="org.apache.commons.digester.Digester.sax" level="ERROR" />
+	<logger name="org.apache.velocity" level="WARN" />
+	<logger name="org.apache.http" level="WARN" />
+	<logger name="org.quartz" level="WARN" />
+	<logger name="org.springframework.jdbc.core.StatementCreatorUtils" level="ERROR" />
+	<logger name="org.springframework" level="ERROR"></logger>
+	<logger name="org.springframework.web" level="ERROR"></logger>
+	<logger name="org.springframework.jdbc.core" level="ERROR" />
+	<logger name="org.springframework.jdbc.core.JdbcTemplate" level="ERROR" />
+	<logger name="org.springframework.scheduling.quartz" level="ERROR" />
+	
+
+	<root level="DEBUG">
+		<appender-ref ref="A1" />
+		<appender-ref ref="SIFT" />
+		
+	</root>
+</configuration>
