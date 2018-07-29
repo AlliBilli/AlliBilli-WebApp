@@ -1,0 +1,23 @@
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+
+  datasource:
+    url: jdbc:mysql://localhost/allibilli?autoReconnect=true
+    username: root
+    password:
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+    hibernate:
+      ddl-auto: update
+logging:
+  level:
+    com: trace
+
+
